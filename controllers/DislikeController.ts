@@ -39,6 +39,9 @@
              app.get("/api/users/:uid/dislikes", DislikeController.dislikeController.findAllTuitsDislikedByUser);
              app.get("/api/tuits/:tid/dislikes", DislikeController.dislikeController.findAllUsersThatDislikedTuit);
              app.put("/api/users/:uid/dislikes/:tid", DislikeController.dislikeController.userTogglesTuitDislikes);
+
+             //test functions
+             app.get("/api/tuits/:tid/dislikes/count", DislikeController.dislikeController.countDislikesOnTuit);
          }
          return DislikeController.dislikeController;
      }
@@ -76,6 +79,11 @@
                  const tuitsFromDislikes = dislikesNonNullTuits.map(dislike => dislike.tuit);
                  res.json(tuitsFromDislikes);
              });
+     }
+
+     countDislikesOnTuit = (req: Request, res: Response) => {
+        DislikeController.dislikeDao.countHowManyDislikedTuit(req.params.tid)
+            .then(count => res.send(count));
      }
  
      
