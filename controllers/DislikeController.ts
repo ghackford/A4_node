@@ -47,7 +47,7 @@
      }
  
      private constructor() {}
- 
+
      /**
       * Retrieves all users that disliked a tuit from the database
       * @param {Request} req Represents request from client, including the path
@@ -81,19 +81,26 @@
              });
      }
 
+     /**
+      * Counts the number of users that have disliked a tuit
+      * @param {Request} req Represents request from client, including the path
+      * parameter tid representing the tuit
+      * @param {Response} res Represents response to client, including a numerical
+      * value of how many users have disliked a tuit
+      */
      countDislikesOnTuit = (req: Request, res: Response) => {
         DislikeController.dislikeDao.countHowManyDislikedTuit(req.params.tid)
-            .then(count => res.send(count));
+            .then(count => res.json(count));
      }
  
      
      /**
+      * 
       * @param {Request} req Represents request from client, including the
-      * path parameters uid and tid representing the user that is liking the tuit
-      * and the tuit being disliked
-      * @param {Response} res Represents response to client, including the
-      * body formatted as JSON containing the new dislikes that was inserted in the
-      * database
+      * path parameters uid and tid representing the user that is toggling their dislike
+      * and the tuit being disliked/undisliked
+      * @param {Response} res Represents response to client, a status code indicating the
+      * success of the operation
       */
      userTogglesTuitDislikes = async (req: Request, res: Response) => {
          const dislikeDao = DislikeController.dislikeDao;
