@@ -42,6 +42,8 @@
 
              //test functions
              app.get("/api/tuits/:tid/dislikes/count", DislikeController.dislikeController.countDislikesOnTuit);
+             app.delete("/api/tuits/dislikes/:did/delete", DislikeController.dislikeController.deleteDislike);
+             app.get("/api/dislikes/:did", DislikeController.dislikeController.findDislikeById);
          }
          return DislikeController.dislikeController;
      }
@@ -55,10 +57,10 @@
       * @param {Response} res Represents response to client, including the
       * body formatted as JSON arrays containing the user objects
       */
-     findAllUsersThatDislikedTuit = (req: Request, res: Response) =>
+     findAllUsersThatDislikedTuit = (req: Request, res: Response) => {
          DislikeController.dislikeDao.findAllUsersThatDislikedTuit(req.params.tid)
              .then(dislikes => res.json(dislikes));
- 
+     }
      /**
       * Retrieves all tuits disliked by a user from the database
       * @param {Request} req Represents request from client, including the path
@@ -86,6 +88,15 @@
             .then(count => res.send(count));
      }
  
+     deleteDislike = (req: Request, res: Response) => {
+         DislikeController.dislikeDao.deleteDislike(req.params.did)
+            .then(status => res.send(status));
+     }
+
+     findDislikeById  = (req: Request, res: Response) => {
+        DislikeController.dislikeDao.findDislikeById(req.params.did)
+            .then(dislike => res.json(dislike));
+     }
      
      /**
       * @param {Request} req Represents request from client, including the
