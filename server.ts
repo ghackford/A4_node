@@ -39,13 +39,13 @@ const app = express();
 app.use(cors({
     credentials: true,
     //origin: 'http://localhost'
-    //origin: process.env.CORS_ORIGIN
-    origin: 'https://cute-torte-3d7d89.netlify.app'
+    origin: process.env.CORS_ORIGIN
+    //origin: 'https://cute-torte-3d7d89.netlify.app'
 }));
 
-const SECRET = 'process.env.SECRET';
+//const SECRET = 'process.env.SECRET';
 let sess = {
-    secret: SECRET,
+    secret: process.env.SECRET,
     saveUninitialized: true,
     resave: true,
     cookie: {
