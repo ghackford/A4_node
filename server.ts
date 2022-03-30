@@ -37,7 +37,7 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: [process.env.CORS_ORIGIN, 'http://localhost', 'http://Localhost']
+    origin: [process.env.CORS_ORIGIN, 'http://localhost', 'http://localhost:3000']
 }));
 
 let sess = {
