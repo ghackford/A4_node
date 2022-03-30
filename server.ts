@@ -40,7 +40,8 @@ app.use(cors({
     credentials: true,
     //origin: 'http://localhost'
     //origin: process.env.CORS_ORIGIN
-    origin: 'https://cute-torte-3d7d89.netlify.app'
+    // origin: 'https://cute-torte-3d7d89.netlify.app'
+    origin: "*"
 }));
 
 const SECRET = 'process.env.SECRET';
