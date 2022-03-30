@@ -39,7 +39,8 @@ const app = express();
 app.use(cors({
     credentials: true,
     //origin: 'http://localhost'
-    origin: process.env.CORS_ORIGIN
+    //origin: process.env.CORS_ORIGIN
+    origin: 'https://cute-torte-3d7d89.netlify.app'
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -55,7 +56,7 @@ let sess = {
 
 if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    sess.cookie.secure = true // serve secure cookies
+    //sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
