@@ -31,19 +31,15 @@ const DB_PASSWORD = process.env.DB_PASSWORD;
 const HOST = "cluster0.3gblq.mongodb.net";
 const DB_NAME = "myFirstDatabase";
 const DB_QUERY = "retryWrites=true&w=majority";
-// const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
 const connectionString = `${PROTOCOL}://${DB_USERNAME}:${DB_PASSWORD}@${HOST}/${DB_NAME}?${DB_QUERY}`;// connect to the database
 mongoose.connect(connectionString);
 
 const app = express();
 app.use(cors({
     credentials: true,
-    //origin: 'http://localhost'
-    origin: process.env.CORS_ORIGIN
-    //origin: 'https://cute-torte-3d7d89.netlify.app'
+    origin: [process.env.CORS_ORIGIN, 'http://localhost']
 }));
 
-//const SECRET = 'process.env.SECRET';
 let sess = {
     secret: process.env.SECRET,
     saveUninitialized: true,
@@ -56,7 +52,6 @@ let sess = {
 
 if (process.env.NODE_ENV === 'production') {
     app.set('trust proxy', 1) // trust first proxy
-    //sess.cookie.secure = true // serve secure cookies
 }
 
 app.use(session(sess))
