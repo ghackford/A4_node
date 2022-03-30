@@ -38,7 +38,8 @@ mongoose.connect(connectionString);
 const app = express();
 app.use(cors({
     credentials: true,
-    origin: 'http://localhost'
+    //origin: 'http://localhost'
+    origin: process.env.CORS_ORIGIN
 }));
 
 const SECRET = 'process.env.SECRET';
@@ -47,7 +48,8 @@ let sess = {
     saveUninitialized: true,
     resave: true,
     cookie: {
-        secure: false
+        sameSite: process.env.NODE_ENV === "production" ? 'none' : 'lax',
+        secure: process.env.NODE_ENV === "production",
     }
 }
 
