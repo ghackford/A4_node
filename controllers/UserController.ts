@@ -138,6 +138,6 @@ export default class UserController implements UserControllerI {
     findUserByUsername = (req: Request, res: Response) =>
         UserController.userDao.findUserByUsername(req.params.username)
          .then(user => {
-            console.log(user);
-            res.sendStatus(user)});
+            console.log("user controller: user = ", user);
+            res.send(user)});
 };
