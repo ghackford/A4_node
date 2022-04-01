@@ -1,3 +1,6 @@
+/**
+ * @file implements mongoose schema for Dislikes
+ */
 import mongoose, {Schema} from "mongoose";
 import Dislike from "../../models/dislikes/Dislike";
 

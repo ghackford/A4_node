@@ -14,10 +14,8 @@
   *     </li>
   *     <li>GET /api/tuits/:tid/dislikes to retrieve all users that disliked a tuit
   *     </li>
-  *     <li>POST /api/users/:uid/dislikes/:tid to record that a user dislikes a tuit
+  *     <li>PUT /api/users/:uid/dislikes/:tid to record that a user dislikes a tuit
   *     </li>
-  *     <li>DELETE /api/users/:uid/undislikes/:tid to record that a user
-  *     no londer dislikes a tuit</li>
   * </ul>
   * @property {DislikeDao} dislikeDao Singleton DAO implementing dislikes CRUD operations
   * @property {DislikeController} DislikeController Singleton controller implementing
@@ -84,22 +82,35 @@
      }
 
      /**
-      * Counts the number of users that have disliked a tuit
-      * @param {Request} req Represents request from client, including the path
-      * parameter tid representing the tuit
-      * @param {Response} res Represents response to client, including a numerical
-      * value of how many users have disliked a tuit
+      * Test function to retrieve the number of dislikes on a tuit
+      * @param {Request} req Represents request from client, including the ID of the tuit
+      * @param {Response} res Represents response to client, including the numerical value
+      * of how many dislikes that tuit has
       */
      countDislikesOnTuit = (req: Request, res: Response) => {
         DislikeController.dislikeDao.countHowManyDislikedTuit(req.params.tid)
             .then(count => res.json(count));
      }
  
+     /**
+      * Test function to directly delete a dislike object from the database
+      * @param {Request} req Represents request from client, including the ID of
+      * the dislike object
+      * @param {Response} res Represents response to client, including the status
+      * of the deletion operation
+      */
      deleteDislike = (req: Request, res: Response) => {
          DislikeController.dislikeDao.deleteDislike(req.params.did)
             .then(status => res.send(status));
      }
 
+     /**
+      * Test function to retrieve a dislike object directly
+      * @param {Request} req Represents request from client, including the ID
+      * of the dislike object
+      * @param {Response} res Represents response to client, including the JSON
+      * formatted dislike object
+      */
      findDislikeById  = (req: Request, res: Response) => {
         DislikeController.dislikeDao.findDislikeById(req.params.did)
             .then(dislike => res.json(dislike));
