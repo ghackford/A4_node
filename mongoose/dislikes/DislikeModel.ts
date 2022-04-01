@@ -1,6 +1,6 @@
 /**
  * @file Implements mongoose model to CRUD
- * documents in the likes collection
+ * documents in the dislikes collection
  */
  import mongoose from "mongoose";
  import DislikeSchema from "./DislikeSchema";
