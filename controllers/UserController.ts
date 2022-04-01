@@ -131,13 +131,25 @@ export default class UserController implements UserControllerI {
         UserController.userDao.deleteAllUsers()
             .then((status) => res.send(status));
 
+    /**
+     * Test function that deletes a user by their username
+     * @param {Request} req Represents request from client, including the username
+     * of the user
+     * @param {Response} res Represents response to client, including the status
+     * of the deletion operation
+     */
     deleteUsersByUsername = (req: Request, res: Response) =>
       UserController.userDao.deleteUsersByUsername(req.params.username)
         .then(status => res.send(status));
     
+    /**
+     * Test function to find a user object in the database by its username
+     * @param {Request} req Represents request from client, including username
+     * of the user
+     * @param {Response} res Represents response to client, including the user
+     * object requested
+     */
     findUserByUsername = (req: Request, res: Response) =>
         UserController.userDao.findUserByUsername(req.params.username)
-         .then(user => {
-            console.log("user controller: user = ", user);
-            res.send(user)});
+         .then(user => {res.send(user)});
 };
